@@ -6,13 +6,14 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:22:08 by jthuysba          #+#    #+#             */
-/*   Updated: 2022/05/17 16:51:09 by jthuysba         ###   ########.fr       */
+/*   Updated: 2022/05/19 14:39:50 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	print_char(char c)
+size_t	print_char(char c)
 {
 	write(1, &c, 1);
+	return (1);
 }

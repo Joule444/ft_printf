@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 14:31:27 by jthuysba          #+#    #+#             */
-/*   Updated: 2022/05/17 16:54:15 by jthuysba         ###   ########.fr       */
+/*   Updated: 2022/05/19 17:16:16 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-void	print_char(char c);
-void	print_str(char *s);
-
-void	print_int(int n);
+size_t	print_char(char c);
+size_t	print_str(char *s);
+size_t	print_point(unsigned long n);
+size_t	print_int(int n);
+size_t	print_base_point(unsigned long int nb);
+size_t	print_base_hex(unsigned int nb, char *base);
+size_t	check_nill(unsigned long int n);
 
 #endif
