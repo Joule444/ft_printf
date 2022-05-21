@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:26:18 by jthuysba          #+#    #+#             */
-/*   Updated: 2022/05/19 17:25:23 by jthuysba         ###   ########.fr       */
+/*   Updated: 2022/05/21 14:29:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	ft_printf(const char *str, ...)
 			}
 			if (str[i] == 'p')
 			{
-				if(check_nill(va_arg(args, unsigned long int)) == 0)
+				//if (check_nill(va_arg(args, unsigned long int)))
+					//len += print_str("(nil)");
+				//else
+					len += print_str("0x");
 					len += print_base_point(va_arg(args, unsigned long int));
 			}
 			if (str[i] == 'd' || str[i] == 'i')
@@ -74,7 +77,7 @@ int	ft_printf(const char *str, ...)
 
 int main()
 {
-	char *d = "lol";
-	printf("%x %X %p \n", -42, -1234, d);
-	ft_printf("%x %X %p ", -42, -1234, d);
+	char *d = "Salut";
+	printf("%p \n", d);
+	ft_printf("%p \n", d);
 }
