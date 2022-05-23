@@ -6,18 +6,41 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 12:26:18 by jthuysba          #+#    #+#             */
-/*   Updated: 2022/05/21 14:29:12 by jthuysba         ###   ########.fr       */
+/*   Updated: 2022/05/23 12:39:51 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdio.h>
+#include "ft_printf.h"
+
+int	check_args(va_list args, char c)
+{
+	int	len;
+
+	len = 0;
+	if (c == 'c')
+		len += print_char(va_arg(args, int));
+	if (c == 's')
+		len += print_str(va_arg(args, char *));
+	if (c == 'p')
+		len += check_nill(va_arg(args, unsigned long int));
+	if (c == 'd' || c == 'i')
+		len += print_int(va_arg(args, int));
+	if (c == 'u')
+		len += print_unint(va_arg(args, unsigned int));
+	if (c == 'x')
+		len += print_base_hex(va_arg(args, unsigned int), "0123456789abcdef");
+	if (c == 'X')
+		len += print_base_hex(va_arg(args, unsigned int), "0123456789ABCDEF");
+	if (c == '%')
+		len += print_char('%');
+	return (len);
+}
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
-	size_t	i;
-	size_t	len;
+	int		i;
+	int		len;
 
 	va_start(args, str);
 	i = 0;
@@ -27,42 +50,7 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			if (str[i] == 'c')
-			{
-				len += print_char(va_arg(args, int));
-			}
-			if (str[i] == 's')
-			{
-				len += print_str(va_arg(args, char *));
-			}
-			if (str[i] == 'p')
-			{
-				//if (check_nill(va_arg(args, unsigned long int)))
-					//len += print_str("(nil)");
-				//else
-					len += print_str("0x");
-					len += print_base_point(va_arg(args, unsigned long int));
-			}
-			if (str[i] == 'd' || str[i] == 'i')
-			{
-				len += print_int(va_arg(args, int));
-			}/*
-			if (str[i] == 'u')
-			{
-				len += print_unint();
-			}*/
-			if (str[i] == 'x')
-			{
-				len += print_base_hex(va_arg(args, unsigned int), "0123456789abcdef");
-			}
-			if (str[i] == 'X')
-			{
-				len += print_base_hex(va_arg(args, unsigned int), "0123456789ABCDEF");
-			}
-			if (str[i] == '%')
-			{
-				len += print_char('%');
-			}
+			len += check_args(args, str[i]);
 			i++;
 		}
 		else
@@ -73,11 +61,4 @@ int	ft_printf(const char *str, ...)
 	}
 	va_end(args);
 	return (len);
-}
-
-int main()
-{
-	char *d = "Salut";
-	printf("%p \n", d);
-	ft_printf("%p \n", d);
 }
